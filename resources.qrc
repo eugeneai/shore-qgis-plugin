@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/shore_qgis_plugin" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>

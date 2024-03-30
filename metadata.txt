@@ -1,0 +1,47 @@
+# This file contains metadata for your plugin.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=shore-qgis-plugin
+qgisMinimumVersion=3.0
+description=The tool collects recognized and refined shapes of water shore lines from satellite images and date lists
+version=0.1
+author=Evgeny Cherkashin and Oksana Mazayeva
+email=eugeneai@irnok.net, moks@crust.irk.ru
+
+about=The tool allows (is going to allow, really) one to collect specific data from satellite images for shore contour modelling (shape prefiction). User selects a rectangular Region of Interest (ROI) and set of dates for which contours should be constructed. The tool, then, downloads Open Street Map layer and adds it to the GIS, if there are no such one. The layer is drawn and user selects the shape, which is to be the initial approximation of the shore line contour. Next, the tool downloads satellite images (along the line) of various resulution for the provided ROI and dates in the user interface. The images are analyzed by a machine learning algoritm SegmentAny, which segments the image. After the segmnentation the segments are filtered and merged according to the set of constraints. After deducing logically the set of pixels, being the shore line, they are converted to a shape. The obtained shape is considered as a refinement of the previous approximation. If there are more specific images are available, then they are downloaded as a set of images for the further approximation. Result is the set of layers (a higher resolution image set and the shore line shape) for the highest resolution for each date for the same region, as well as shape file with all the shoreline shapes marked by year of exposition, which can be used for ArcGIS DSAS plugin processing.
+
+tracker=https://github.com/eugeneai/shore-qgis-plugin/issues
+repository=https://github.com/eugeneai/shore-qgis-plugin
+# End of mandatory metadata
+
+# Recommended items:
+
+hasProcessingProvider=no
+# Uncomment the following line and add your changelog:
+# changelog=
+
+# Tags are comma separated with spaces allowed
+tags=python
+
+homepage=https://github.com/eugeneai/shore-qgis-plugin
+category=Raster
+icon=icon.png
+# experimental flag
+experimental=True
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
+# Since QGIS 3.8, a comma separated list of plugins to be installed
+# (or upgraded) can be specified.
+# Check the documentation for more information.
+# plugin_dependencies=
+
+Category of the plugin: Raster, Vector, Database or Web
+# category=
+
+# If the plugin can run on QGIS Server.
+server=False
+
