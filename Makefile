@@ -77,14 +77,18 @@ PLUGIN_UPLOAD = $(c)/plugin_upload.py
 
 RESOURCE_SRC=$(shell grep '^ *<file' resources.qrc | sed 's@</file>@@g;s/.*>//g' | tr '\n' ' ')
 
-.PHONY: default
+.PHONY: default pb-deploy
 default:
 	@echo While you can use make to build and deploy your plugin, pb_tool
 	@echo is a much better solution.
 	@echo A Python script, pb_tool provides platform independent management of
 	@echo your plugins and runs anywhere.
 	@echo You can install pb_tool using: pip install pb_tool
+	@echo OR run make pb-deploy to run pb_tool deploy -y
 	@echo See https://g-sherman.github.io/plugin_build_tool/ for info. 
+
+pb-deploy:
+	pb_tool deploy -y
 
 compile: $(COMPILED_RESOURCE_FILES)
 
