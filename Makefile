@@ -38,7 +38,7 @@ LOCALES =
 # translation
 SOURCES = \
 	__init__.py \
-	shore_qgis_plugin.py shore_qgis_plugin_dockwidget.py
+	shore_qgis_plugin.py shore_qgis_plugin_dockwidget.py resources.py
 
 PLUGINNAME = shore_qgis_plugin
 
@@ -48,7 +48,7 @@ PY_FILES = \
 
 UI_FILES = shore_qgis_plugin_dockwidget_base.ui
 
-EXTRAS = metadata.txt icon.png
+EXTRAS = metadata.txt icon.png icon.svg
 
 EXTRA_DIRS =
 
@@ -84,10 +84,12 @@ default:
 	@echo A Python script, pb_tool provides platform independent management of
 	@echo your plugins and runs anywhere.
 	@echo You can install pb_tool using: pip install pb_tool
-	@echo OR run make pb-deploy to run pb_tool deploy -y
-	@echo See https://g-sherman.github.io/plugin_build_tool/ for info. 
+	@echo OR run make pb-deploy to run resource compuler and pb_tool deploy -y
+	@echo See https://g-sherman.github.io/plugin_build_tool/ for info.
 
-pb-deploy:
+resources.py: icon.png
+
+pb-deploy: $(SOURCES)
 	pb_tool deploy -y
 
 compile: $(COMPILED_RESOURCE_FILES)

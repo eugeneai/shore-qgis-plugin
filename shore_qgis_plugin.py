@@ -24,6 +24,9 @@
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction
+from qgis.core import QgsMessageLog, Qgis
+from qgis.core import QgsProject
+
 # Initialize Qt resources from file resources.py
 from .resources import *
 
@@ -89,7 +92,6 @@ class ShoreDataCollector:
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('ShoreDataCollector', message)
 
-
     def add_action(
         self,
         icon_path,
@@ -141,6 +143,10 @@ class ShoreDataCollector:
         """
 
         icon = QIcon(icon_path)
+
+        QgsMessageLog.logMessage("Icon path: {}".format(icon_path),
+                                 'shore_qgis_plugin', level=Qgis.Info)
+
         action = QAction(icon, text, parent)
         action.triggered.connect(callback)
         action.setEnabled(enabled_flag)
@@ -222,6 +228,7 @@ class ShoreDataCollector:
             if self.dockwidget == None:
                 # Create the dockwidget (after translation) and keep reference
                 self.dockwidget = ShoreDataCollectorDockWidget()
+                self.dockwidget.iface = self.iface
 
             # connect to provide cleanup on closing of dockwidget
             self.dockwidget.closingPlugin.connect(self.onClosePlugin)
